@@ -88,7 +88,7 @@ public class ThirdActivity extends AppCompatActivity {
                             JSONObject o = array.getJSONObject(mPostkey);
 
 
-                            setTitle(" ");
+                            setTitle("");
 
 
                             textViewNamaMarvel.setText(o.getString("name"));

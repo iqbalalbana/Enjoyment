@@ -88,7 +88,7 @@ public class SecondActivity extends AppCompatActivity {
                             JSONObject o = array.getJSONObject(mPostkey);
 
 
-                            setTitle(" ");
+                            setTitle("");
 
 
                             textViewJudulTV.setText(o.getString("original_name"));

@@ -36,7 +36,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
 
     private List<HomeListItem> listItems;
-
+//    private List<Place> listPlaces;
+//    Place place;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,6 +57,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         listItems = new ArrayList<>();
+
+//        listPlaces = new ArrayList<>();
+
 
         loadRecyclerViewData();
 

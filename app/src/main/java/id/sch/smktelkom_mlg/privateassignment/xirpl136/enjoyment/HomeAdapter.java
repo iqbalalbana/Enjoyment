@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+
 /**
  * Created by Yuzron on 12/05/2017.
  */
@@ -21,6 +22,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<HomeListItem> homeListItems;
     private Context context;
+
+//
+//    Place place;
+//    boolean isNew;
 
     //model dari HomeList
     public HomeAdapter(List<HomeListItem> homeListItems, Context context) {
@@ -67,6 +72,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+
         return homeListItems.size();
     }
 

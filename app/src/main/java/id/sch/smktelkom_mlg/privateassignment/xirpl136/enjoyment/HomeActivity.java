@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class HomeActivity extends AppCompatActivity {
 
     private static final String URL_DATA = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=cf48be249b4ace270b61684fe3644bae";
@@ -28,7 +29,13 @@ public class HomeActivity extends AppCompatActivity {
     public TextView textViewTerbit;
     public TextView textViewOverview;
     public ImageView imageViewDetail;
+
     private Integer mPostkey = null;
+
+//    public Button btnRate;
+//    public Spinner spinnerRating;
+//    public boolean isNew;
+//    public Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mPostkey = getIntent().getExtras().getInt("blog_id");
+
 
         loadRecyclerViewData();
 
@@ -60,6 +68,16 @@ public class HomeActivity extends AppCompatActivity {
         textViewTerbit = (TextView) findViewById(R.id.textViewTerbit);
         textViewOverview = (TextView) findViewById(R.id.textViewOverview);
         imageViewDetail = (ImageView) findViewById(R.id.imageViewDetail);
+
+//        spinnerRating = (Spinner) findViewById(R.id.spinnerRating);
+//        findViewById(R.id.btnRate).setOnClickListener(
+//                new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        doRate();
+//                    }
+//                }
+//        );
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -70,6 +88,25 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+//    private void fillData() {
+//        spinnerRating.setSelected(place.rate);
+//    }
+//    private void doRate() {
+//        String rate = spinnerRating.getSelectedItem().toString();
+//
+//        if (rate.isEmpty())
+//        {
+//        //    Snackbar.make(findViewById(R.id.spinnerRating), place.ra + " Terhapus", Snackbar.LENGTH_LONG)
+//        }
+//        else
+//        {
+//            if (isNew){
+//                place = new Place(rate);
+//                place.save();
+//            }
+//        }
+//    }
+
 
     private void loadRecyclerViewData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
