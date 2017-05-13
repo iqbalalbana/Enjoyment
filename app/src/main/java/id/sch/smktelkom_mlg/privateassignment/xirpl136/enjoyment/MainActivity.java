@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_tv) {
             fragment = new SecondFragment();
             setTitle("TV Show");
+        } else if (id == R.id.nav_marvel) {
+            fragment = new ThirdFragment();
+            setTitle("Marvel Character");
         }
 //        else if (id == R.id.nav_slideshow) {
 //
