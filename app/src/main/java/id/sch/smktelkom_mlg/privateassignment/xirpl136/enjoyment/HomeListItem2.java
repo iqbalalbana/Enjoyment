@@ -24,6 +24,7 @@ public class HomeListItem2 implements Serializable {
 
     }
 
+
     public String getPoster() {
         return poster;
     }

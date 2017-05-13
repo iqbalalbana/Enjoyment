@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -56,7 +55,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, homeListItem.getJudul() + " dipilih", Toast.LENGTH_LONG).show();
+                //   Toast.makeText(context, homeListItem.getJudul() + " dipilih", Toast.LENGTH_LONG).show();
                 Intent singleBlogIntent = new Intent(context, HomeActivity.class);
                 singleBlogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 singleBlogIntent.putExtra("blog_id", position);

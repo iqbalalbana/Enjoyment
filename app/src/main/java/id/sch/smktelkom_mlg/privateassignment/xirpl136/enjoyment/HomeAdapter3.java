@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -15,16 +16,14 @@ import java.util.List;
 /**
  * Created by Yuzron on 13/05/2017.
  */
+public class HomeAdapter3 extends RecyclerView.Adapter<HomeAdapter3.ViewHolder> {
 
-
-public class HomeAdapter2 extends RecyclerView.Adapter<HomeAdapter2.ViewHolder> {
-
-    private List<HomeListItem2> homeListItems2;
+    private List<HomeListItem3> homeListItems3;
     private Context context;
 
     //model dari HomeList
-    public HomeAdapter2(List<HomeListItem2> homeListItems2, Context context) {
-        this.homeListItems2 = homeListItems2;
+    public HomeAdapter3(List<HomeListItem3> homeListItems3, Context context) {
+        this.homeListItems3 = homeListItems3;
         this.context = context;
     }
 
@@ -38,14 +37,14 @@ public class HomeAdapter2 extends RecyclerView.Adapter<HomeAdapter2.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.second_item, parent, false);
+                .inflate(R.layout.third_item, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        final HomeListItem2 homeListItem2 = homeListItems2.get(position);
+        final HomeListItem3 homeListItem3 = homeListItems3.get(position);
 
 //        holder.textViewJudulTV.setText(homeListItem2.getJudul());
 //        //holder.imageViewOtof.setImageURI(homeListItem.getImageUrl());
@@ -57,14 +56,14 @@ public class HomeAdapter2 extends RecyclerView.Adapter<HomeAdapter2.ViewHolder> 
 //        );
         Glide
                 .with(context)
-                .load(homeListItem2.getBackdrop())
-                .into(holder.imageViewTV);
-        holder.imageViewTV.setOnClickListener(new View.OnClickListener() {
+                .load(homeListItem3.getImage())
+                .into(holder.imageViewMarvel);
+        holder.imageViewMarvel.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-//                Toast.makeText(context, homeListItem2.getJudul() + " dipilih", Toast.LENGTH_LONG).show();
-                Intent singleBlogIntent = new Intent(context, SecondActivity.class);
+                //            Toast.makeText(context, homeListItem3.getNama() + " dipilih", Toast.LENGTH_LONG).show();
+                Intent singleBlogIntent = new Intent(context, ThirdActivity.class);
                 singleBlogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 singleBlogIntent.putExtra("blog_id", position);
                 context.startActivity(singleBlogIntent);
@@ -75,20 +74,20 @@ public class HomeAdapter2 extends RecyclerView.Adapter<HomeAdapter2.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return homeListItems2.size();
+        return homeListItems3.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         //        public TextView textViewJudulTV;
-        public ImageView imageViewTV;
+        public ImageView imageViewMarvel;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
 //            textViewJudulTV = (TextView) itemView.findViewById(R.id.textViewJudulTV);
-            imageViewTV = (ImageView) itemView.findViewById(R.id.imageViewTV);
+            imageViewMarvel = (ImageView) itemView.findViewById(R.id.imageViewMarvel);
 
 
         }
