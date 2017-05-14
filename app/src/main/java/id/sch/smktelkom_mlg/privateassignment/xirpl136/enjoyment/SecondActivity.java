@@ -1,8 +1,9 @@
 package id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment.Sugar.Place;
 
@@ -39,16 +42,21 @@ public class SecondActivity extends AppCompatActivity {
     public String Backdrop;
     public Spinner spinnerRating;
     public Button btnRate;
+    public byte[] gambar = new byte[2048];
     //    public boolean isNew;
     Place place;
     boolean isPressed = true;
     //    FloatingActionButton fab;
     boolean isNew;
     ArrayList<Place> pItem;
-
-
+    JSONObject o = null;
     private Integer mPostkey = null;
 
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,19 +69,19 @@ public class SecondActivity extends AppCompatActivity {
 
         loadRecyclerViewData();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Uri uri = Uri.parse(url); // missing 'http://' will cause crashed
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Uri uri = Uri.parse(url); // missing 'http://' will cause crashed
+////
+////                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+////
+////                startActivity(intent);
 //
-//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//            }
 //
-//                startActivity(intent);
-
-            }
-
-        });
+//        });
 
 
         textViewJudulTV = (TextView) findViewById(R.id.textViewJudulTV);
@@ -116,7 +124,7 @@ public class SecondActivity extends AppCompatActivity {
         String overview = textViewOverviewTV.getText().toString();
         String terbit = textViewTerbitTV.getText().toString();
         String judul = textViewJudulTV.getText().toString();
-        String backdrop = Backdrop;
+        byte[] backdrop = gambar;
         String rate = spinnerRating.getSelectedItem().toString();
 
         place = new Place(overview, terbit, judul, backdrop, rate);
@@ -139,7 +147,7 @@ public class SecondActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(s);
                             JSONArray array = jsonObject.getJSONArray("results");
-                            JSONObject o = array.getJSONObject(mPostkey);
+                            final JSONObject o = array.getJSONObject(mPostkey);
 
 
                             setTitle("");
@@ -148,7 +156,7 @@ public class SecondActivity extends AppCompatActivity {
                             textViewJudulTV.setText(o.getString("original_name"));
                             textViewTerbitTV.setText(o.getString("first_air_date"));
                             textViewOverviewTV.setText(o.getString("overview"));
-                            Backdrop = o.getString("backdrop_path");
+//                            Backdrop = "https://image.tmdb.org/t/p/w500" + o.getString("poster_path");
 
 //                            url = o.getJSONObject("link").getString("url");
 
@@ -157,6 +165,27 @@ public class SecondActivity extends AppCompatActivity {
                                     .with(SecondActivity.this)
                                     .load("https://image.tmdb.org/t/p/w500" + o.getString("backdrop_path"))
                                     .into(imageViewDetailTV);
+                            new AsyncTask<Void, Void, Void>() {
+                                @Override
+                                protected Void doInBackground(Void... params) {
+                                    try {
+                                        Bitmap bitmap = Glide.
+                                                with(getApplicationContext()).
+                                                load("https://image.tmdb.org/t/p/w500" + o.getString("backdrop_path")).
+                                                asBitmap().
+                                                into(500, 500).get();
+                                        gambar = getBytes(bitmap);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    return null;
+                                }
+                            }.execute();
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
