@@ -9,22 +9,24 @@ import java.io.Serializable;
  */
 
 public class Place extends SugarRecord implements Serializable {
-    public String poster;
-    public String overview;
-    public String terbit;
-    public String judul;
-    public String backdrop;
-    public String rate;
+    //    String poster;
+    String overview;
+    String terbit;
+    String judul;
+    String backdrop;
+    String rate;
+
+    public Place() {
 
 
-    public Place(String rate, String poster, String overview, String terbit, String judul, String backdrop) {
-        this.poster = poster;
+    }
+
+    public Place(String overview, String terbit, String judul, String backdrop, String rate) {
+//        this.poster = poster;
         this.overview = overview;
         this.terbit = terbit;
         this.judul = judul;
         this.backdrop = backdrop;
         this.rate = rate;
-
     }
-
 }

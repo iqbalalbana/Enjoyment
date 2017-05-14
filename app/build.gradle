@@ -34,5 +34,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'com.github.satyan:sugar:1.5'
+    compile 'io.realm:realm-android:0.82.1'
     testCompile 'junit:junit:4.12'
 }

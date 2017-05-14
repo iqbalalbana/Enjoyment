@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment.Sugar.Rate1_Fragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -99,6 +101,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_marvel) {
             fragment = new ThirdFragment();
             setTitle("Marvel Character");
+        } else if (id == R.id.nav_rate) {
+            fragment = new Rate1_Fragment();
+            setTitle("Rating");
         }
 //        else if (id == R.id.nav_slideshow) {
 //

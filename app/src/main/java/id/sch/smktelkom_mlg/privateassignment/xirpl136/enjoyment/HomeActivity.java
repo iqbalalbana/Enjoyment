@@ -3,10 +3,13 @@ package id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -21,6 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment.Sugar.Place;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,13 +36,17 @@ public class HomeActivity extends AppCompatActivity {
     public TextView textViewTerbit;
     public TextView textViewOverview;
     public ImageView imageViewDetail;
-
-    private Integer mPostkey = null;
-
-//    public Button btnRate;
-//    public Spinner spinnerRating;
+    public Button btnRate;
+    public Spinner spinnerRating;
+    //    public PlaceItem placeItem;
+    public String Backdrop;
 //    public boolean isNew;
-//    public Place place;
+Place place;
+    boolean isPressed = true;
+    //    FloatingActionButton fab;
+    boolean isNew;
+    ArrayList<Place> pItem;
+    private Integer mPostkey = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +80,26 @@ public class HomeActivity extends AppCompatActivity {
         textViewOverview = (TextView) findViewById(R.id.textViewOverview);
         imageViewDetail = (ImageView) findViewById(R.id.imageViewDetail);
 
-//        spinnerRating = (Spinner) findViewById(R.id.spinnerRating);
-//        findViewById(R.id.btnRate).setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        doRate();
-//                    }
-//                }
-//        );
+        spinnerRating = (Spinner) findViewById(R.id.spinnerRating);
+        btnRate = (Button) findViewById(R.id.btnRate);
+
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPressed) {
+                    doSave();
+                    Snackbar.make(view, "Anda berhasil memberi rating, lihat di favorit", Snackbar.LENGTH_LONG)
+
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Artikel favorit anda", Snackbar.LENGTH_LONG)
+
+                            .setAction("Action", null).show();
+                }
+                isPressed = !isPressed;
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -87,6 +109,18 @@ public class HomeActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void doSave() {
+
+        String overview = textViewOverview.getText().toString();
+        String terbit = textViewTerbit.getText().toString();
+        String judul = textViewJudul.getText().toString();
+        String backdrop = Backdrop;
+        String rate = spinnerRating.getSelectedItem().toString();
+
+        place = new Place(overview, terbit, judul, backdrop, rate);
+        place.save();
     }
 //    private void fillData() {
 //        spinnerRating.setSelected(place.rate);
