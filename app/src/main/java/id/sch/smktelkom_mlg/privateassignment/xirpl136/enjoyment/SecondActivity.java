@@ -3,10 +3,13 @@ package id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -21,12 +24,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.privateassignment.xirpl136.enjoyment.Sugar.Place;
+
 public class SecondActivity extends AppCompatActivity {
     private static final String URL_DATA = "https://api.themoviedb.org/3/tv/popular?api_key=cf48be249b4ace270b61684fe3644bae";
     public TextView textViewJudulTV;
     public TextView textViewTerbitTV;
     public TextView textViewOverviewTV;
     public ImageView imageViewDetailTV;
+
+    //    public PlaceItem placeItem;
+    public String Backdrop;
+    public Spinner spinnerRating;
+    public Button btnRate;
+    //    public boolean isNew;
+    Place place;
+    boolean isPressed = true;
+    //    FloatingActionButton fab;
+    boolean isNew;
+    ArrayList<Place> pItem;
+
+
     private Integer mPostkey = null;
 
     @Override
@@ -37,6 +57,7 @@ public class SecondActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mPostkey = getIntent().getExtras().getInt("blog_id");
+
 
         loadRecyclerViewData();
 
@@ -59,6 +80,27 @@ public class SecondActivity extends AppCompatActivity {
         textViewTerbitTV = (TextView) findViewById(R.id.textViewTerbitTV);
         textViewOverviewTV = (TextView) findViewById(R.id.textViewOverviewTV);
         imageViewDetailTV = (ImageView) findViewById(R.id.imageViewDetailTV);
+
+        spinnerRating = (Spinner) findViewById(R.id.spinnerRating);
+        btnRate = (Button) findViewById(R.id.btnRate);
+
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPressed) {
+                    doSave();
+                    Snackbar.make(view, "Anda berhasil memberi rating, lihat di favorit", Snackbar.LENGTH_LONG)
+
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Artikel favorit anda", Snackbar.LENGTH_LONG)
+
+                            .setAction("Action", null).show();
+                }
+                isPressed = !isPressed;
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -69,6 +111,18 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void doSave() {
+        String overview = textViewOverviewTV.getText().toString();
+        String terbit = textViewTerbitTV.getText().toString();
+        String judul = textViewJudulTV.getText().toString();
+        String backdrop = Backdrop;
+        String rate = spinnerRating.getSelectedItem().toString();
+
+        place = new Place(overview, terbit, judul, backdrop, rate);
+        place.save();
+    }
+
 
     private void loadRecyclerViewData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -94,6 +148,7 @@ public class SecondActivity extends AppCompatActivity {
                             textViewJudulTV.setText(o.getString("original_name"));
                             textViewTerbitTV.setText(o.getString("first_air_date"));
                             textViewOverviewTV.setText(o.getString("overview"));
+                            Backdrop = o.getString("backdrop_path");
 
 //                            url = o.getJSONObject("link").getString("url");
 

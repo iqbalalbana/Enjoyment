@@ -43,9 +43,24 @@
                 android:id="@+id/textViewDescMarvel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:paddingBottom="7dp"
                 android:text="Desc"
                 android:textSize="8pt" />
+
+            <Spinner
+                android:id="@+id/spinnerRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/favorit" />
+
+            <Button
+                android:id="@+id/btnRate"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="16dp"
+                android:text="Give Rate" />
 
 
         </LinearLayout>
