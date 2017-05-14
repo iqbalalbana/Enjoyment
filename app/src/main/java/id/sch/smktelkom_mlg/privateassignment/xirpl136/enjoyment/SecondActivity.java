@@ -100,7 +100,7 @@ public class SecondActivity extends AppCompatActivity {
                             Glide
 
                                     .with(SecondActivity.this)
-                                    .load("https://image.tmdb.org/t/p/w500" + o.getString("poster_path"))
+                                    .load("https://image.tmdb.org/t/p/w500" + o.getString("backdrop_path"))
                                     .into(imageViewDetailTV);
 
                         } catch (JSONException e) {

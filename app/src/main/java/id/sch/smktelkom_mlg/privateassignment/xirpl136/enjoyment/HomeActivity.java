@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     public ImageView imageViewDetail;
     public Button btnRate;
     public Spinner spinnerRating;
+
     //    public PlaceItem placeItem;
     public String Backdrop;
 //    public boolean isNew;
@@ -46,6 +47,7 @@ Place place;
     //    FloatingActionButton fab;
     boolean isNew;
     ArrayList<Place> pItem;
+
     private Integer mPostkey = null;
 
     @Override
@@ -166,13 +168,13 @@ Place place;
                             textViewJudul.setText(o.getString("title"));
                             textViewTerbit.setText(o.getString("release_date"));
                             textViewOverview.setText(o.getString("overview"));
-
+                            Backdrop = o.getString("backdrop_path");
 //                            url = o.getJSONObject("link").getString("url");
 
                             Glide
 
                                     .with(HomeActivity.this)
-                                    .load("https://image.tmdb.org/t/p/w500" + o.getString("poster_path"))
+                                    .load("https://image.tmdb.org/t/p/w500" + o.getString("backdrop_path"))
                                     .into(imageViewDetail);
 
                         } catch (JSONException e) {
